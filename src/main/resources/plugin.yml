@@ -1,0 +1,12 @@
+name: XTuccar
+version: '1.0-SNAPSHOT'
+main: org.xfurkanadenia.xtuccar.XTuccar
+api-version: '1.21'
+prefix: XTuccar
+authors: [ xFurkanAdenia ]
+description: Advanced Tuccar plugin
+commands:
+  tüccar:
+
+depend:
+  - Vault

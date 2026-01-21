@@ -1,0 +1,56 @@
+reloaded: "%prefix%&aEklenti başarıyla %elapsed%ms içinde yeniden yüklendi!"
+no-permission: "%prefix%&cMalesef bunun için yetkiniz yok!"
+saved: "%prefix%&aTüm veriler %elapsed%ms içinde kaydedildi."
+
+
+invalid-number: "%prefix%&cLütfen geçerli bir sayı giriniz."
+
+console-cant-run: "%prefix%&cBu komutu sadece oyuncu kullanabilir!"
+
+player-not-have-enough-item: "%prefix%&cEnvanterinizde %amount%x %item% bulunmuyor!"
+player-not-have-enough-money: "%prefix%&cMalesef bu ürün için paranız yetmiyor!"
+player-not-have-enough-space: "%prefix%&cMalesef bu ürün için envanterinizde yeterli alan yok!"
+player-not-selling-item: "%prefix%&cSiz bu itemi satmıyorsunuz! /tüccar sell ile satabilirsiniz."
+player-already-selling-item: "%prefix%&cBu eşyayı zaten satıyosunuz! /tüccar addStock komutu ile eşyanıza stok ekleyebilirsiniz."
+player-hand-empty: "%prefix%&cLütfen elinize eşya alın!"
+
+player-sold-item: "%prefix% %item_material_upper% adlı eşyanız %buyer% tarafından %amount% adet alındı!: &bYeni stok: &f%stock_newStock%"
+
+item-not-found: "%prefix%&cBöyle bir eşya bulunamadı!"
+
+item-cant-sell: "%prefix%&cBu eşya satılamaz!"
+item-selled: "%prefix%&a%amount_formatted% adet %item% Eşya başarıyla %price_formatted% paraya satıldı!"
+item-not-sell: "%prefix%&cEşya satılamadı!"
+item-not-have-enough-stock: "%prefix%&cMalesef ürünün bu kadar stoğu yok!"
+
+item-stock-added: "%prefix%&a%item% eşyasına başarıyla %amount% stok eklendi! &bYeni stok: &f%stock_newStock%"
+item-stock-not-added: "%prefix%&cStock eklenemedi!"
+
+item-price-changed: "%prefix%&a%item% eşyasısının ücreti başarıyla %price_formatted% olarak değiştirildi!"
+item-price-not-changed: "%prefix%&c%item% eşyasısının ücreti değiştirilemedi!"
+
+cancel: "iptal"
+cancelled: "%prefix%&cİptal edildi!"
+player-item-buy-chat:
+  - "&7---------------------"
+  - ""
+  - "&eSatın almak istediğiniz miktarı giriniz"
+  - "&cİptal etmek için: &fiptal"
+  - ""
+  - "&7---------------------"
+
+completers:
+  amount: "<miktar>"
+  price: "<ücret>"
+  item-name: "<eşya-adı>"
+
+amounts:
+  all: "hepsi"
+  hand: "elindeki"
+
+
+usages:
+  sell: "%prefix%&cKullanım &7» &e/tüccar sell <miktar> <ücret>"
+  addStock: "%prefix%&cKullanım &7» &e/tüccar addStock <miktar / hepsi / elindeki>"
+  addItem: "%prefix%&cKullanım &7» &e/tüccar addItem <eşya-adı> <kategori-adı>"
+  changePrice: "%prefix%&cKullanım &7» &e/tüccar changePrice <ücret>"

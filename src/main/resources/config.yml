@@ -1,0 +1,19 @@
+locale: "tr_TR"
+
+prefix: "&3XTuccar &7» "
+
+database:
+  #types: MYSQL, SQLITE
+  type: SQLITE
+  host: localhost
+  port: 3306
+  username: user
+  password: supersecretpass
+  tableName: xtuccar
+
+subcommands:
+  sell: "sell"
+  addStock: "addStock"
+  change-price: "changePrice"
+  reload: "reload"
+  saveAll: "saveAll"

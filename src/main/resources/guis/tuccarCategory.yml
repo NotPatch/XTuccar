@@ -1,0 +1,7 @@
+title: "Categories"
+size: 54
+items:
+  categories:
+    material: STONE
+    type: categories
+    slots: [10,12,14,16]

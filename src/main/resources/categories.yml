@@ -1,0 +1,12 @@
+categories:
+  blocks:
+    displayName: "&aBlocks"
+    lore:
+      - ""
+      - "&7Click to open blocks category"
+
+  mob-drops:
+    displayName: "&aMob Drops"
+    lore:
+      - ""
+      - "&7Click to open Mob Drops category"

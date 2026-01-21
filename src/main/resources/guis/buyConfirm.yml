@@ -1,0 +1,46 @@
+title: "Buy Confirmation"
+size: 27
+
+items:
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    displayName: "&7"
+    slots: [
+      0,1,2,3,4,5,6,7,8,
+      9,10,11,12,13,14,15,16,17,
+      18,19,20,21,22,23,24,25,26
+    ]
+
+  confirm:
+    type: confirm
+    material: LIME_WOOL
+    displayName: "&a✔ Confirm Purchase"
+    lore:
+      - "&7You are about to buy this item!"
+      - ""
+      - "&fItem: &e%item_name%"
+      - "&fAmount: &e%amount%"
+      - "&fTotal Price: &6%price_total%"
+      - ""
+      - "&aClick to confirm."
+    slot: 11
+
+  cancel:
+    type: cancel
+    material: RED_WOOL
+    displayName: "&c✖ Cancel"
+    lore:
+      - "&7Click to cancel purchase."
+    slot: 15
+
+  info:
+    type: info
+    material: BOOK
+    displayName: "&eItem Information"
+    lore:
+      - "&7Seller: &f%seller%"
+      - "&7Item: &f%item_name%"
+      - "&7Price Each: &f%price%"
+      - "&7Amount: &f%amount%"
+      - "&7Total: &6%total_price%"
+    slot: 13
