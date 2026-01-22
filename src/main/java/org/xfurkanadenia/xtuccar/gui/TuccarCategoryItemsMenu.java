@@ -38,7 +38,7 @@ public class TuccarCategoryItemsMenu extends cFastInv {
                         });
                     });
                 }
-                case "back" -> setItems(item.getSlots().stream().mapToInt(Integer::intValue).toArray(), Utils.getFormattedItem(item.getItem(), player, Utils.getCategoryPlaceholders(category)), e -> {
+                case "back" -> setItems(item.getSlots(), Utils.getFormattedItem(item.getItem(), player, Utils.getCategoryPlaceholders(category)), e -> {
                         new TuccarCategoryMenu(player).open(player);
                     });
 

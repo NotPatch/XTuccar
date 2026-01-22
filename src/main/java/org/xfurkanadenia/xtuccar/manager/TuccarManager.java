@@ -236,6 +236,7 @@ public class TuccarManager {
             if (!found) {
                 found = getTuccarDAO().isPlayerSellingItem(seller, itemid);
             }
+            System.out.println(found);
             callback.accept(found);
         });
     }
@@ -284,37 +285,42 @@ public class TuccarManager {
         String itemId = marketItem.getItemId();
         Player player = Bukkit.getPlayer(seller);
         Bukkit.getScheduler().runTaskAsynchronously(XTuccar.getInstance(), () -> {
-            if(player == null) {
+            if (player == null) {
                 callback.accept(false);
                 return;
             }
-            if(Utils.getItemAmount(item, player) < amount) {
+            if (Utils.getItemAmount(item, player) < amount) {
                 callback.accept(false);
                 return;
             }
-            if (!getTuccarDAO().isPlayerSellingItem(seller, itemId)) {
-                callback.accept(false);
-                return;
-            }
-            MarketSellingItem[] marketSellingItem = {null};
-            cache.asMap().forEach((k, v) -> {
-                if(v.getSeller().equals(seller) && v.getItemId().equals(itemId)) {
-                    marketSellingItem[0] = v;
+            isPlayerSellingItem(seller, itemId, isSelling -> {
+                if (!isSelling) {
+                    callback.accept(false);
+                    return;
                 }
+
+
+                MarketSellingItem[] marketSellingItem = {null};
+                cache.asMap().forEach((k, v) -> {
+                    if (v.getSeller().equals(seller) && v.getItemId().equals(itemId)) {
+                        marketSellingItem[0] = v;
+                    }
+                });
+
+                if (marketSellingItem[0] == null)
+                    marketSellingItem[0] = getTuccarDAO().getItemsBySeller(seller).values().stream().filter(v -> Objects.equals(v.getItemId(), itemId)).findFirst().orElse(null);
+
+                if (marketSellingItem[0] != null) {
+                    if (removeItem) {
+                        ItemStack i = new ItemStack(item);
+                        i.setAmount(amount);
+                        player.getInventory().removeItem(i);
+                    }
+                    marketSellingItem[0].addAmount(amount);
+                }
+
+                callback.accept(true);
             });
-
-            if(marketSellingItem[0] == null) marketSellingItem[0] = getTuccarDAO().getItemsBySeller(seller).values().stream().filter(v -> Objects.equals(v.getItemId(), itemId)).findFirst().orElse(null);
-
-            if(marketSellingItem[0] != null) {
-                if(removeItem){
-                    ItemStack i = new ItemStack(item);
-                    i.setAmount(amount);
-                    player.getInventory().removeItem(i);
-                }
-                marketSellingItem[0].addAmount(amount);
-            }
-
-            callback.accept(true);
         });
     }
 

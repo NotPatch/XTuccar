@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.xfurkanadenia.xtuccar.XTuccar;
 
@@ -25,13 +26,14 @@ import org.xfurkanadenia.xtuccar.model.MarketSellingItem;
 public class Utils {
     public static List<String> translateColorCodes(List<String> list) {
         List<String> _list = new ArrayList<>(list);
-        for(String line : _list) {
+        for (String line : _list) {
             line = String.valueOf(line);
             int index = _list.indexOf(line);
             _list.set(index, Utils.translateColorCodes(line));
         }
         return _list;
     }
+
     public static String translateColorCodes(String message) {
         if (message == null) return "";
 
@@ -54,6 +56,7 @@ public class Utils {
         }
         return txt;
     }
+
     public static String placeholders(String txt, CommandSender sender, Map<String, String> vars) {
         if (XTuccar.getInstance().getServer().getPluginManager().getPlugin("PlaceHolderAPI") != null && sender instanceof Player) {
             boolean parse = true;
@@ -84,6 +87,7 @@ public class Utils {
         }
         return formatted;
     }
+
     public static List<String> getFormatted(List<String> list, Player player, Map<String, String> vars) {
         List<String> formatted = new ArrayList<>();
         for (String txt : list) {
@@ -107,6 +111,7 @@ public class Utils {
     public static ItemStack getFormattedItem(ItemStack i, Player p, Map<String, String> vars) {
         return getFormattedItem(i, p, vars, true);
     }
+
     public static ItemStack getFormattedItem(ItemStack i, Player p, Map<String, String> vars, boolean hide) {
         ItemStack item = i.clone();
         ItemMeta itemMeta = item.getItemMeta();
@@ -118,7 +123,7 @@ public class Utils {
             );
             itemMeta.setLore(lore);
         }
-        if(hide) itemMeta.addItemFlags(ItemFlag.values());
+        if (hide) itemMeta.addItemFlags(ItemFlag.values());
         item.setItemMeta(itemMeta);
         return item;
     }
@@ -180,16 +185,17 @@ public class Utils {
     public static boolean ValidateInteger(Player player, String str) {
         XTuccar plugin = XTuccar.getInstance();
         Locale locale = plugin.getLocale();
-        if(!isInt(str)) {
+        if (!isInt(str)) {
             locale.sendMessage(player, "invalid-number");
             return false;
         }
         return true;
     }
+
     public static boolean ValidateDouble(Player player, String str) {
         XTuccar plugin = XTuccar.getInstance();
         Locale locale = plugin.getLocale();
-        if(!isDouble(str)) {
+        if (!isDouble(str)) {
             locale.sendMessage(player, "invalid-number");
             return false;
         }
@@ -202,34 +208,33 @@ public class Utils {
 
     public static int getItemAmount(ItemStack i, Player p) {
         int amount = 0;
-        for(ItemStack item : p.getInventory().getContents()) {
-            if(item != null && item.isSimilar(i)) amount += item.getAmount();
+        for (ItemStack item : p.getInventory().getContents()) {
+            if (item != null && item.isSimilar(i)) amount += item.getAmount();
         }
         return amount;
     }
 
-    public static boolean hasSpace(Player player, ItemStack item, int amount) {
-        int remaining = amount;
-        ItemStack[] contents = player.getInventory().getStorageContents();
+    public static boolean hasSpace(Player player, ItemStack item) {
+        if (item == null || item.getType().isAir()) return true;
 
-        for (ItemStack content : contents) {
-            if (content == null || content.getType() == Material.AIR) {
-                // Boş slot → maksimum stack size kadar yer var
-                remaining -= item.getMaxStackSize();
-            } else if (content.isSimilar(item)) {
-                // Aynı item varsa, boş kalan kapasiteyi hesapla
-                int availableSpace = item.getMaxStackSize() - content.getAmount();
-                if (availableSpace > 0) {
-                    remaining -= availableSpace;
+        PlayerInventory inv = player.getInventory();
+        int amount = item.getAmount();
+        int maxStackSize = item.getMaxStackSize();
+
+        for (int i = 0; i < 36; i++) {
+            ItemStack slot = inv.getItem(i);
+            if (slot == null || slot.getType().isAir()) {
+                return true;
+            }
+            if (slot.isSimilar(item)) {
+                int canAdd = maxStackSize - slot.getAmount();
+                if (canAdd > 0) {
+                    amount -= canAdd;
+                    if (amount <= 0) return true;
                 }
             }
-
-            if (remaining <= 0) {
-                return true; // Yeterli yer bulundu
-            }
         }
+        return false;
 
-        return remaining <= 0; // Son kontrol
     }
-
 }

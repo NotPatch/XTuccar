@@ -30,7 +30,7 @@ public class BuyConfirmMenu extends cFastInv {
                             openMenu(player, marketSellingItem);
                             return;
                         }
-                        if(!Validator.ValidateHasSpace(player, marketSellingItem.getMarketItem().getItem(), amount)) {
+                        if(!Validator.ValidateHasSpace(player, marketSellingItem.getMarketItem().getItem())) {
                             openMenu(player, marketSellingItem);
                             return;
                         }

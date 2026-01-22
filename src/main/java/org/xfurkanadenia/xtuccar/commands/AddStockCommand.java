@@ -56,7 +56,6 @@ public class AddStockCommand extends SubCommand {
 
 
         if (Utils.getItemAmount(heldItem, player) < amount) {
-            sender.sendMessage(String.valueOf(Utils.getItemAmount(heldItem, player)));
             locale.sendMessage(player, "player-not-have-enough-item", vars);
             return;
         }

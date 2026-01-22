@@ -34,7 +34,7 @@ public class ActionUtils {
     }
 
 
-    private static List<Action> parseActions(List<String> rawActions) {
+    public static List<Action> parseActions(List<String> rawActions) {
         List<Action> actions = new ArrayList<>();
         for (String action : rawActions) {
             if (action == null || action.trim().isEmpty()) continue;
@@ -51,6 +51,7 @@ public class ActionUtils {
     public static void executeActions(Player player, List<Action> actions, Map<String, String> vars) {
         actions.forEach(action -> {
             String value = action.getValue();
+            System.out.println(action + " " + value);
             switch (action.getName().toLowerCase()) {
                 case "player":
                     Bukkit.dispatchCommand(player, Utils.placeholders(value, player, vars));

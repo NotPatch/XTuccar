@@ -43,7 +43,7 @@ public final class XTuccar extends JavaPlugin {
         dataManager = new DataManager();
         FastInvManager.register(this);
         this.getServer().getPluginManager().registerEvents(new PlayerChatListener(), this);
-        getCommand("tüccar").setExecutor(new MainCommand());
+
         reload(v -> {});
     }
 
@@ -54,7 +54,7 @@ public final class XTuccar extends JavaPlugin {
             reloadConfig();
 
             if(getTuccarManager() != null) getTuccarManager().flushSync();
-
+            getCommand("tüccar").setExecutor(new MainCommand());
             marketItemsCfg = new DataFile("items.yml");
             marketItemsCfg.saveDefaultConfig();
             marketItemsCfg.reloadConfig();

@@ -11,6 +11,7 @@ import org.xfurkanadenia.xtuccar.model.Category;
 import org.xfurkanadenia.xtuccar.model.SubCommand;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AddItemCommand extends SubCommand {
@@ -24,7 +25,7 @@ public class AddItemCommand extends SubCommand {
         if(!ValidatePermission(sender, "xtuccar.addItem")) return;
         if(!ValidateIsPlayer(sender)) return;
         if(args.length < 2) {
-            locale.sendMessage(sender, "usages.addItem");
+            locale.sendMessage(sender, "usages.addItem", Map.of());
             return;
         }
         Player player = (Player) sender;

@@ -41,6 +41,12 @@ public class PlayerSellingItemsMenu extends cFastInv {
                             if (hasNextPage) new PlayerSellingItemsMenu(p, page + 1).open(p);
                         }
                 );
+                case "back" -> setItems(slots,
+                        Utils.getFormattedItem(item.getItem(), p, getPlaceholders(page)),
+                        e -> {
+                             new TuccarCategoryMenu(p).open(p);
+                        }
+                );
                 default -> setItems(slots, Utils.getFormattedItem(item.getItem(), p, getPlaceholders(page)));
             }
         });
@@ -75,13 +81,17 @@ public class PlayerSellingItemsMenu extends cFastInv {
 
             for (int i = 0; i < pageItems.size() && i < slots.length; i++) {
                 MarketSellingItem v = pageItems.get(i);
+                if(v.getMarketItem() == null) continue;
                 ItemStack cItem = v.getMarketItem().getItem();
                 ItemMeta cItemMeta = cItem.getItemMeta();
                 cItemMeta.setLore(itemsConfig.getItem().getItemMeta().getLore());
                 cItem.setItemMeta(cItemMeta);
                 setItem(
                         slots[i],
-                        Utils.getFormattedItem(cItem, p, getPlaceholders(v))
+                        Utils.getFormattedItem(cItem, p, getPlaceholders(v)),
+                        e -> {
+
+                        }
                 );
             }
         });

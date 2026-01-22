@@ -5,6 +5,7 @@ import org.xfurkanadenia.xtuccar.XTuccar;
 import org.xfurkanadenia.xtuccar.Logger;
 import org.xfurkanadenia.xtuccar.model.GUI;
 import org.xfurkanadenia.xtuccar.model.GUIItem;
+import org.xfurkanadenia.xtuccar.util.ActionUtils;
 import org.xfurkanadenia.xtuccar.util.FileUtils;
 import fr.mrmicky.fastinv.FastInv;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -65,7 +66,10 @@ public class GUIManager {
             assert itemSection != null;
 
             GUIItem item = new GUIItem(ItemUtils.getItem(itemSection), slots);
-            if (itemSection.contains("actions")) item.setRawActions(itemSection.getStringList("actions"));
+            if (itemSection.contains("actions")) {
+                item.setRawActions(itemSection.getStringList("actions"));
+                item.setActions(ActionUtils.parseActions(itemSection.getStringList("actions")));
+            }
             if (itemSection.contains("type")) item.setType(itemSection.getString("type"));
 
             gui.setItem(item);

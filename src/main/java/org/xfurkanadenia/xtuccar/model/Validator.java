@@ -50,8 +50,8 @@ public class Validator {
         return true;
     }
 
-    public static boolean ValidateHasSpace(Player player, ItemStack item, int amount) {
-        boolean hasSpace = Utils.hasSpace(player, item, amount);
+    public static boolean ValidateHasSpace(Player player, ItemStack item) {
+        boolean hasSpace = Utils.hasSpace(player, item);
         XTuccar plugin = XTuccar.getInstance();
         Locale locale = plugin.getLocale();
         if(!hasSpace) {
